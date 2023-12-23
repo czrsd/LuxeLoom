@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import Message from "../components/Message";
 
 export const CartContext = createContext();
@@ -8,6 +8,12 @@ const CartProvider = ({ children }) => {
   const [itemAmount, setItemAmount] = useState(0);
   const [total, setTotal] = useState(0);
   const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    // Retrieve cart data from localStorage when the component mounts
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart);
+  }, []);
 
   useEffect(() => {
     const calculateTotal = () => {
@@ -29,6 +35,11 @@ const CartProvider = ({ children }) => {
     };
 
     calculateItemAmount();
+  }, [cart]);
+
+  // Update localStorage whenever cart changes
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   const showMessage = (type, text) => {

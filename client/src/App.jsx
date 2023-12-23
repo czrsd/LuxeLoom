@@ -8,6 +8,7 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/product/:id" element={<ProductDetails />}></Route>
         </Routes>
         <Sidebar />
